@@ -7,10 +7,6 @@ package model;
 import dao.RoomDAO;
 import dao.ServiceDAO;
 
-/**
- *
- * @author lvhn1
- */
 public class RoomService {
     private int RID;
     private int SeID;
