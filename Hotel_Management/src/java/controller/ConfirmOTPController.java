@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package controller;
 
 import dao.UserDAO;
@@ -19,10 +16,7 @@ import model.User;
 import util.PasswordUtil;
 import util.Validation;
 
-/**
- *
- * @author khoa2
- */
+
 @WebServlet(name = "registOTPController", urlPatterns = {"/confirmOTP"})
 public class ConfirmOTPController extends HttpServlet {
 
@@ -111,7 +105,7 @@ public class ConfirmOTPController extends HttpServlet {
             setCookieTimeOut(listCookie, response, 0);
             response.sendRedirect("home");
         } else {
-            String otpErrorMsg = "OTP is not correct, please check again";
+            String otpErrorMsg = "OTP is not correct, please check again ! ";
             request.setAttribute("otpErrorMsg", otpErrorMsg);
             request.getRequestDispatcher("signUpOTP.jsp").forward(request, response);
         }
