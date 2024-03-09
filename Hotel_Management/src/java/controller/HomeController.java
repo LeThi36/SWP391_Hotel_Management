@@ -5,8 +5,8 @@
 
 package controller;
 
-//import dao.RoomDAO;
-//import dao.ServiceDAO;
+import dao.RoomDAO;
+import dao.ServiceDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -62,8 +62,8 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //initial DAO and variable
-        //RoomDAO roomDAO = new RoomDAO();
-        //ServiceDAO serviceDAO = new ServiceDAO();
+        RoomDAO roomDAO = new RoomDAO();
+        ServiceDAO serviceDAO = new ServiceDAO();
         
         List<Rooms> roomList = roomDAO.getRandomRooms(4);
         List<Servicess> serviceList = serviceDAO.getTopServices(6);

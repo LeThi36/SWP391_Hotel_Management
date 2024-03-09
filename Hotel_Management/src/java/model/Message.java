@@ -6,10 +6,6 @@ package model;
 
 import java.util.Date;
 
-/**
- *
- * @author lvhn1
- */
 public class Message {
     
     private int id;

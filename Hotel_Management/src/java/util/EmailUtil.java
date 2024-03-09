@@ -14,10 +14,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author nhatm
- */
 public class EmailUtil {
 
     //Email: focuslearn927@gmail.com

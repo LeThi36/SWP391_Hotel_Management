@@ -11,10 +11,6 @@ import java.security.SecureRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author nhatm
- */
 public class PasswordUtil {
 
     private static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
