@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author Admin
- */
 public class Servicess {
 
     private int SeID;
@@ -18,25 +10,6 @@ public class Servicess {
     private int Status;
     private String icon;
     private String description;
-
-    public Servicess() {
-    }
-
-    public Servicess(int SeID, String ServiceName, int Status, String icon, String description) {
-        this.SeID = SeID;
-        this.ServiceName = ServiceName;
-        this.Status = Status;
-        this.icon = icon;
-        this.description = description;
-    }
-    
-    public Servicess(String ServiceName, int Status, String icon, String description) {
-        this.SeID = SeID;
-        this.ServiceName = ServiceName;
-        this.Status = Status;
-        this.icon = icon;
-        this.description = description;
-    }
 
     // Constructors, getters, setters, and other methods
     public int getSeID() {
