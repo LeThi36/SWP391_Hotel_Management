@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import dao.UserDAO;
@@ -122,7 +118,7 @@ public class LogController extends HttpServlet {
             return;
         }
 
-        response.sendRedirect("home");
+        request.getRequestDispatcher("home").forward(request, response);
     }
 
     private void setCookieTimeOut(ArrayList<Cookie> listCookie, HttpServletResponse response, int timeExist) {
