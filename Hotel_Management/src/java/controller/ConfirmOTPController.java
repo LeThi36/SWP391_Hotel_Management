@@ -124,7 +124,7 @@ public class ConfirmOTPController extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Short description ";
     }// </editor-fold>
 
 }
