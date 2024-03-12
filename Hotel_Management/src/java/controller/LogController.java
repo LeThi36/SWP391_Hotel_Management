@@ -19,10 +19,6 @@ import java.util.ArrayList;
 import util.PasswordUtil;
 import util.Validation;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "LogController", urlPatterns = {"/log"})
 public class LogController extends HttpServlet {
 
@@ -64,9 +60,9 @@ public class LogController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().invalidate();
-        response.sendRedirect("home");
-
+//        request.getSession().invalidate();
+//        response.sendRedirect("home");
+        response.sendRedirect("login.jsp");
     }
 
     /**
@@ -105,11 +101,8 @@ public class LogController extends HttpServlet {
 
         //Get session
         HttpSession session = request.getSession();
-        
-        User userDB = userDAO.readUserByUsernameAndPassword(username, hashedPassword);
-        
         //check existed account in database
-        if (userDB != null) {
+        if (userDAO.readUserByUsernameAndPassword(username, hashedPassword) != null) {
             //get user in database
             User user = userDAO.readUserByUsername(username);
             session.setAttribute("User", user);
@@ -129,9 +122,7 @@ public class LogController extends HttpServlet {
             return;
         }
 
-        if (userDB.getRole() != 1)
-            response.sendRedirect("home");
-        else response.sendRedirect("user");
+        response.sendRedirect("home");
     }
 
     private void setCookieTimeOut(ArrayList<Cookie> listCookie, HttpServletResponse response, int timeExist) {
