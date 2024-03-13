@@ -10,9 +10,7 @@ public class Rooms {
     private int Capacity;
     private String Img;
     private int Status;
-    private int BID; // Foreign key referencing Beds(BID)
-
-    // Constructors, getters, setters, and other methods
+    private int BID; 
 
     public int getRID() {
         return RID;
