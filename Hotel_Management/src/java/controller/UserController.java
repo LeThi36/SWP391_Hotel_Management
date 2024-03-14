@@ -1,3 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
 package controller;
 
 import dao.UserDAO;
@@ -9,10 +14,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import util.PasswordUtil;
 import model.User;
 
-
+/**
+ *
+ * @author lvhn1
+ */
 @WebServlet(name="UserController", urlPatterns={"/user"})
 public class UserController extends HttpServlet {
 
@@ -73,7 +80,7 @@ public class UserController extends HttpServlet {
 
     private void createUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        String role = request.getParameter("role");
+        String role = request.getParameter("role");
         String phonenumber = request.getParameter("phonenumber");
         String password = request.getParameter("password");
         String fullName = request.getParameter("fullName");
@@ -83,7 +90,7 @@ public class UserController extends HttpServlet {
 
         // Perform any validation if needed
 
-        int userId = userDAO.createUser("2", phonenumber, (new PasswordUtil()).hashPasswordMD5(password), fullName, email, gender, dob);
+        int userId = userDAO.createUser(role, phonenumber, password, fullName, email, gender, dob);
 
         if (userId > 0) {
             response.sendRedirect("user?action=list&success");
@@ -118,7 +125,7 @@ public class UserController extends HttpServlet {
         userDAO.updateUser(user);
         response.sendRedirect("user?action=list&success");
     }
-    
+
      private void banUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
