@@ -1,9 +1,3 @@
-<%-- 
-    Document   : forgotPassword
-    Created on : Oct 2, 2023, 1:38:43 PM
-    Author     : nhatm
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
