@@ -107,12 +107,22 @@
                                 <a href="#" class="bk-btn">Booking Now</a>
                                 <div class="language-option">
                                     <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="">
-                                    <span>Nam <i class="fa fa-angle-down"></i></span>
+                                    <c:if test="${sessionScope.User != null}">
+                                        
+                                        <span>User <i class="fa fa-angle-down"></i></span>
+                                    </c:if>
+                                    <c:if test="${sessionScope.User eq null}">
+                                        <span><i class="fa fa-sign-in"></i></span>
+                                    </c:if>
                                     <div class="flag-dropdown">
                                         <ul>
-                                            <li><a href="login.jsp">Login</a></li>
-                                            <li><a href="profile">Profile</a></li>
-                                            <li><a href="log">Logout</a></li>
+                                            <c:if test="${sessionScope.User != null}">
+                                                <li><a href="profile">Profile</a></li>
+                                                <li><a href="log">Logout</a></li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.User eq null}">
+                                                <li><a href="login.jsp">Login</a></li>
+                                            </c:if>
                                         </ul>
                                     </div>
                                 </div>
