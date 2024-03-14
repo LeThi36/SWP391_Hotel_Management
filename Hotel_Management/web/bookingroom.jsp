@@ -1,7 +1,7 @@
 <%-- 
     Document   : bookingroom
     Created on : Jan 20, 2024, 8:16:45 PM
-    Author     : PC
+    Author     : Admin
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -47,20 +47,16 @@
             background-attachment: fixed;
             background-image: url(https://media.istockphoto.com/id/962720026/photo/bedroom-and-living-on-balcony-in-hotel-or-resort-bedroom-white-tone-design-and-white.jpg?s=170667a&w=0&k=20&c=RWgS3d2glc0Diqp2qu_xpOWSEGdrUh4OX2SPEYTjMhc=);
         }
-
         .checkdate {
             width: 50%;
         }
-
         .room-booking {
             background-color: rgb(226, 226, 226);
             padding: 5% 10%;
         }
-
         .date {
             width: 45%;
         }
-
         .select-option input[type=text] {
             width: 100%;
             height: 50px;
@@ -69,7 +65,6 @@
             color: #aaaab3;
             padding-left: 20px;
         }
-
         textarea {
             width: 100%;
             height: 132px;
@@ -84,7 +79,7 @@
     </style>
 </head>
 
-<body >
+<body>
 
     <div class="col-lg-8">
         <div style="display: flex; justify-content: space-between; width: 100%; padding: 15px; margin-top: 300px;">
@@ -104,64 +99,61 @@
             <h3>Your Reservation</h3>
             <p style="margin-bottom: 50px;">Please check the information of the form. Your registration will be verified
                 prior to your arrival.</p>
-            <form action="payment" method="post">
+            <form action="#">
                 <div class="check-date" style="display: flex; justify-content: space-between;">
                     <div class="date">
                         <label for="date-in">Check In:</label>
-                        <input type="text" class="date-input" name="checkIn" id="date-in" value="${checkIn}">
+                        <input type="text" class="date-input" id="date-in">
                         <i class="icon_calendar" style="text-align: right; right: 57%;"></i>
                     </div>
                     <div class="date">
                         <label for="date-out">Check Out:</label>
-                        <input type="text" class="date-input" name="checkOut" id="date-out" value="${checkOut}">
+                        <input type="text" class="date-input" id="date-out">
                         <i class="icon_calendar"></i>
                     </div>
                 </div>
                 <div class="check-date">
                     <label for="date-out">Room information:</label>
-                    <input type="hidden" class="date-input" id="date-out" name="id" value="${room.getRID()}" >
-                    <input type="text" id="date-out" value="${room.getName()}" readonly>
+                        <input type="text" class="date-input" id="date-out">
                         <i id="show" class='bx bx-show' onclick=""></i>
                 </div>
                 <div class="select-option">
                     <label for="guest">Guests:</label>
-                    <input id="guest" type="text" placeholder="Email" name="numPeople" value="${numPeople}" readonly style="color: #19191a">
+                    <select id="guest">
+                        <option value="">3 Adults</option>
+                    </select>
                 </div>
                 <div class="select-option">
-                    <label for="numRoom">Number of Room:</label>
-                    <input id="numRoom" type="text" placeholder="Email" name="numRoom" value="${numRoom}" readonly style="color: #19191a">
+                    <label for="room">Room:</label>
+                    <select id="room">
+                        <option value="">1 Room</option>
+                    </select>
                 </div>
                 <div class="select-option">
                     <label for="email">Email:</label>
-                    <input id="email" type="text" placeholder="Email" value="${email}" readonly style="color: #19191a">
+                    <input id="email" type="text" placeholder="Email">
                 </div>
                 <div class="select-option">
                     <label for="phone">Phone number:</label>
-                    <input id="phone" type="text" placeholder="Phonenumber" value="${phone}" readonly style="color: #19191a">
+                    <input id="phone" type="text" placeholder="Phonenumber">
                 </div>
                 <div class="select-option">
                     <label for="payment">Payment Method:</label>
                     <select id="payment">
                         <option value="">VNPAY</option>
-                        <option value="">Paypal</option>
+                        <option value="">Direct</option>
                     </select>
                 </div>
                 <div>
-                    
+
                 </div>
                 <div class="select-option">
                     <label for="note">Any special accommodation needs:</label>
-                    <textarea name="note" placeholder="Feel free to contact us ..."></textarea>
+                    <textarea placeholder="Your Review"></textarea>
                 </div>
-                
-                <div class="select-option d-flex justify-content-end" >
-                    <p class="text-left" style="width: fit-content">Total: ${numRoom* 10000}</p>
-                    <input type="hidden" name="amount" value="${numRoom* 10000}">
-                </div>
-                
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <button class="btn" style="color: white; background-color: #DFA974;width: 48%;" type="submit">Submit</button>
-                    <button class="btn" style="color: white; background-color: #DFA974;width: 48%;" type="button" onclick="window.location.href = './home'">Cancel</button>
+                    <button class="btn" style="color: white; background-color: #DFA974;width: 48%;" type="submit">Subtmit</button>
+                    <button class="btn" style="color: white; background-color: #DFA974;width: 48%;" type="submit">Cancel</button>
                 </div>
             </form>
         </div>
