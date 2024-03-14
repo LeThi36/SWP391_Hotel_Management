@@ -1,3 +1,8 @@
+<%-- 
+    Document   : roomdetail
+    Created on : Jan 20, 2024, 3:52:19 PM
+    Author     : PC
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -10,7 +15,7 @@
         <meta name="keywords" content="Sona, unica, creative, html">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title> Sona | Template</title>
+        <title>Sona | Template</title>
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -77,26 +82,6 @@
                 background: #fff;
                 clip-path: polygon(50% 50%, 0 0, 100% 0);
             }
-
-            #btnnn {
-                display: block;
-                font-size: 14px;
-                text-transform: uppercase;
-                border: 1px solid #dfa974;
-                border-radius: 2px;
-                color: #dfa974;
-                font-weight: 500;
-                background: transparent;
-                width: 100%;
-                height: 46px;
-                margin-top: 30px;
-            }
-
-            #btnnn:hover {
-                background: #19191a;
-                color: white;
-            }
-
         </style>
     </head>
 
@@ -189,7 +174,6 @@
                                         <ul>
                                             <c:if test="${sessionScope.User != null}">
                                                 <li><a href="profile">Profile</a></li>
-                                                <li><a href="listbooked">Booked</a></li> 
                                                 <li><a href="log">Logout</a></li>
                                                 </c:if>
                                                 <c:if test="${sessionScope.User eq null}">
@@ -219,7 +203,16 @@
                                     <ul>
                                         <li><a href="home">Home</a></li>
                                         <li class="active"><a href="listroom">Rooms</a></li>
-                                        <li><a href="./about-us.jsp">About Us</a></li>
+                                        <li><a href="./about-us.html">About Us</a></li>
+                                        <li><a href="./pages.html">Pages</a>
+                                            <ul class="dropdown">
+                                                <li><a href="./room-details.html">Room Details</a></li>
+                                                <li><a href="./blog-details.html">Blog Details</a></li>
+                                                <li><a href="#">Family Room</a></li>
+                                                <li><a href="#">Premium Room</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="./blog.html">News</a></li>
                                         <li><a href="./contact.jsp">Contact</a></li>
                                     </ul>
                                 </nav>
@@ -272,7 +265,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h2>${String.format("%,.0f", room.getPrice())} VND<span>/Pernight</span></h2>
+                                <h2>${room.getPrice()}$<span>/Pernight</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
@@ -287,6 +280,10 @@
                                             <td class="r-o">Bed:</td>
                                             <td>${room.getBedSById().getBedName()}</td>
                                         </tr>
+                                        <tr>
+                                            <td class="r-o">Services:</td>
+                                            <td>${room.listServiceInString()}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <p class="f-para">
@@ -296,46 +293,91 @@
                         </div>
                         <div class="rd-reviews">
                             <h4>Reviews</h4>
-
-                            <c:forEach items="${listFeedback}" var="fb">
-                                <div class="review-item">
-                                    <div class="ri-pic">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="">
+                            <div class="review-item">
+                                <div class="ri-pic">
+                                    <img src="img/room/avatar/avatar-1.jpg" alt="">
+                                </div>
+                                <div class="ri-text">
+                                    <span>27 Aug 2019</span>
+                                    <div class="rating">
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star-half_alt"></i>
                                     </div>
-                                    <div class="ri-text">
-                                        <span>${fb.getCreatedDate()}</span>
-                                        <div class="rating">
-                                            <c:forEach begin="1" end="${fb.getRating()}">
-                                                <i class="icon_star active"></i>
-                                            </c:forEach>
-
-                                            <c:forEach begin="${fb.getRating()}" end="4">
-                                                <i class="icon_star "></i>
-                                            </c:forEach>
+                                    <h5>Brandon Kelley</h5>
+                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
+                                        magnam.</p>
+                                </div>
+                            </div>
+                            <div class="review-item">
+                                <div class="ri-pic">
+                                    <img src="img/room/avatar/avatar-2.jpg" alt="">
+                                </div>
+                                <div class="ri-text">
+                                    <span>27 Aug 2019</span>
+                                    <div class="rating">
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star-half_alt"></i>
+                                    </div>
+                                    <h5>Brandon Kelley</h5>
+                                    <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                                        adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
+                                        magnam.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-add">
+                            <h4>Add Review</h4>
+                            <form action="#" class="ra-form">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder="Name*">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" placeholder="Email*">
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div>
+                                            <h5>You Rating:</h5>
+                                            <div class="rating">
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star"></i>
+                                                <i class="icon_star-half_alt"></i>
+                                            </div>
                                         </div>
-                                        <h5>${fb.getUserFeedback().getFullName()}</h5>
-                                        <p>${fb.getContent()}</p>
+                                        <textarea placeholder="Your Review"></textarea>
+                                        <button type="submit">Submit Now</button>
                                     </div>
                                 </div>
-                            </c:forEach>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="room-booking">
                             <h3>Your Reservation</h3>
-                            <form action="roomdetail" class="ra-form">
+                            <form action="checkavailable" class="ra-form">
                                 <input type="hidden" name="id" value="${room.getRID()}">
                                 <div class="check-date">
                                     <label for="date-in">Check In:</label>
-                                    <input style="padding-right: 15px" type="date" id="date-in" name="checkInDate" value="${checkInDate}" onchange="resetlink()" required>
+                                    <input type="text" class="date-input" id="date-in" name="checkIn" required>
+                                    <i class="icon_calendar"></i>
                                 </div>
                                 <div class="check-date">
                                     <label for="date-out">Check Out:</label>
-                                    <input style="padding-right: 15px" type="date"  id="date-out" name="checkOutDate" value="${checkOutDate}" onchange="resetlink()" required>
+                                    <input type="text" class="date-input" id="date-out" name="checkOut" required>
+                                    <i class="icon_calendar"></i>
                                 </div>
                                 <div class="select-option">
                                     <label for="guest">Number People: </label>
-                                    <select id="guest" name="numPeople" onchange="resetlink()">
+                                    <select id="guest" name="numPeople">
                                         <c:forEach begin="1" end="${room.getCapacity()}" var="number">
                                             <option value="${number}">${number} Person</option>
                                         </c:forEach>
@@ -343,23 +385,11 @@
                                     </select>
                                 </div>
                                 <div class="select-option">
-                                    <label for="room">Number Room: (${room.getTotalRoom() } remaining)</label>
-                                    <input id="room" style="color: #19191a" type="text" placeholder="Number of rooms" name="numRoom" value="1" onchange="resetlink()" required>
+                                    <label for="room">Number Room:</label>
+                                    <input id="room" style="color: #19191a" type="text" placeholder="Number of rooms" name="numRoom" value="1" required>
                                 </div>
-                                <div>
-                                    <label>Choose Service:  </label> 
-                                    <div>
-                                        <c:forEach items="${room.getListServiceByRoomId()}" var="sv">
-                                            <div style="background-color: #e5e5e5; padding: 5px; margin-bottom: 20px; display: inline-block;">
-                                                <span>${sv.getServiceName()}</span> 
-                                                <input class="sevices" type="checkbox" name="svId" value="${sv.getSeID()}" onclick="resetlink()">
-                                            </div>
-                                        </c:forEach>
-                                    </div>
-                                </div>
-
-                                <a id="btnnn" href="confirmbooking?id=${room.getRID()}&checkIn=${checkInDate}&checkOut=${checkOutDate}&numPeople=0&numRoom_raw=3}" class="btn btn-primary">Book now</a>
-                                <button type="submit" class="btn btn-primary">Update information</button>
+                                <button type="submit" class="btn btn-primary">Check availability</button>
+                                <button id="bookingbtnn" type="button" style="display: none" data-bs-toggle="modal" data-bs-target="#exampleModal"/></button>
                             </form>
                         </div>
                     </div>
@@ -367,64 +397,6 @@
             </div>
         </section>
         <!-- Room Details Section End -->
-        
-        <script>
-            function updateCheckOutDateMin() {
-                // Get the selected checkInDate value
-                var checkInDate = document.getElementById('date-in').value;
-
-                // Set the minimum checkOutDate value to checkInDate
-                var checkOutDate = document.getElementById('date-out');
-                checkOutDate.min = checkInDate;
-                if (checkOutDate.value < checkInDate) {
-                    checkOutDate.value = checkInDate;
-                }
-            }
-            
-            function updateCheckInDateMax() {
-                // Get the selected checkInDate value
-                var  checkOutDate= document.getElementById('date-out').value;
-
-                // Set the minimum checkOutDate value to checkInDate
-                var checkInDate = document.getElementById('date-in');
-                checkInDate.max = checkInDate;
-                if (checkInDate.value > checkOutDate) {
-                    checkInDate.value = checkOutDate;
-                }
-            }
-            
-            let link = document.getElementById('btnnn');
-            let numberRoom = document.getElementById('room');
-            let numberPeople = document.getElementById('guest');
-            link.href = 'confirmbooking?id=${room.getRID()}&checkIn=${checkInDate}&checkOut=${checkOutDate}&numPeople=' + numberPeople.value + '&numRoom=' + numberRoom.value;
-            function resetlink() {
-                let inputCheckIn = document.getElementById('date-in');
-                let msggg = document.getElementById('msggg');
-                let inputcheckOut = document.getElementById('date-out');
-                let link = document.getElementById('btnnn');
-                let numberRoom = document.getElementById('room');
-                let numberPeople = document.getElementById('guest');
-
-                let listServices = document.getElementsByClassName('sevices');
-                let urlService = '';
-                for (var i = 0; i < listServices.length; i++) {
-                    if (listServices[i].checked) {
-                        urlService += '&svId=' + listServices[i].value;
-                    }
-                }
-
-                link.href = 'confirmbooking?id=${room.getRID()}&checkIn=' + inputCheckIn.value + '&checkOut=' + inputcheckOut.value + '&numPeople=' + numberPeople.value + '&numRoom=' + numberRoom.value + urlService;
-                if (inputCheckIn.value > inputcheckOut.value) {
-                    link.href = '#';
-                    msggg.style.display = 'inline';
-                } else {
-                    msggg.style.display = 'none';
-                }
-
-                updateCheckOutDateMin();
-                updateCheckInDateMax();
-            }
-        </script>
 
 
 
@@ -522,7 +494,7 @@
                                     <div class="check-container d-flex justify-content-center align-items-center rounded-pill">
                                         <img class="iconheight"
                                              src="https://img.icons8.com/office/16/000000/checkmark--v1.png"
-                                             alt="check-lg">
+                                               alt="check-lg">
                                     </div>
                                 </div>
                                 <h1 class="fw-bold">Awesome!</h1>
@@ -594,26 +566,6 @@
         </c:if>
 
 
-        <script>
-            let inputCheckIn = document.getElementById('date-in');
-            let inputcheckOut = document.getElementById('date-out');
-
-            const today = new Date();
-            const year = today.getFullYear();
-            let month = today.getMonth() + 1;
-            let day = today.getDate();
-
-            // Add leading zero for single-digit months and days
-            month = month < 10 ? '0' + month : month;
-            day = day < 10 ? '0' + day : day;
-            let date = year + '-' + month + '-' + day;
-
-            inputCheckIn.min = date;
-            inputcheckOut.min = date;
-        </script>
-        
-        
-
 
         <!-- bootstrap link -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -628,5 +580,17 @@
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/main.js"></script>
     </body>
+
+
+    <script>
+                                        if ('${status}' !== null) {
+                                            document.getElementById('bookingbtnn').click();
+                                        }
+                                        function submit() {
+                                            document.getElementById('confirmbookingform').submit();
+                                        }
+
+    </script>
+
 
 </html>

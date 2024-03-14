@@ -1,3 +1,9 @@
+<%-- 
+    Document   : listrooms
+    Created on : Jan 20, 2024, 2:23:09 PM
+    Author     : PC
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -26,6 +32,8 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
     </head>
 
     <body>
@@ -63,7 +71,7 @@
                 <ul>
                     <li class="active"><a href="./index.html">Home</a></li>
                     <li><a href="./rooms.html">Rooms</a></li>
-                    <li><a href="./about-us.html">About Us</a></li>
+                    <li><a href="./about-us.jsp">About Us</a></li>
                     <li><a href="./pages.html">Pages</a>
                         <ul class="dropdown">
                             <li><a href="./room-details.html">Room Details</a></li>
@@ -91,7 +99,7 @@
         <!-- Offcanvas Menu Section End -->
 
         <!-- Header Section Begin -->
-        <header class="header-section">
+        <header class="header-section header-normal">
             <div class="top-nav">
                 <div class="container">
                     <div class="row">
@@ -103,7 +111,6 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="tn-right">
-
                                 <a href="listroom" class="bk-btn">Booking Now</a>
                                 <div class="language-option">
                                     <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="">
@@ -118,6 +125,7 @@
                                         <ul>
                                             <c:if test="${sessionScope.User != null}">
                                                 <li><a href="profile">Profile</a></li>
+                                                <li><a href="listbooked">Booked</a></li> 
                                                 <li><a href="log">Logout</a></li>
                                                 </c:if>
                                                 <c:if test="${sessionScope.User eq null}">
@@ -145,18 +153,9 @@
                             <div class="nav-menu">
                                 <nav class="mainmenu">
                                     <ul>
-                                        <li class="active"><a href="home">Home</a></li>
-                                        <li><a href="listroom">Rooms</a></li>
+                                        <li><a href="home">Home</a></li>
+                                        <li class="active"><a href="listroom">Rooms</a></li>
                                         <li><a href="./about-us.jsp">About Us</a></li>
-                                        <li><a href="./pages.html">Pages</a>
-                                            <ul class="dropdown">
-                                                <li><a href="./room-details.html">Room Details</a></li>
-                                                <li><a href="./blog-details.html">Blog Details</a></li>
-                                                <li><a href="#">Family Room</a></li>
-                                                <li><a href="#">Premium Room</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="./blog.html">News</a></li>
                                         <li><a href="./contact.jsp">Contact</a></li>
                                     </ul>
                                 </nav>
@@ -177,11 +176,40 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb-text">
-                            <h2>About Us</h2>
+                            <h2>Our Rooms</h2>
                             <div class="bt-option">
-                                <a href="./index.html">Home</a>
-                                <span>About Us</span>
+                                <a href="home">Home</a>
+                                <span>Rooms</span>
                             </div>
+                        </div>
+                        <div class="container mt-4">
+                            <form action="listroom">
+                                <div class="row mb-4">
+                                    <div class="col-md-3">
+                                        <label for="guest">Capacity:</label><br>
+                                        <select id="guest" name="Capacity" style="width: 150px; ">
+                                            <option value="2" ${Capacity eq 2 ? 'selected' : ''}>2 People</option>
+                                            <option value="3" ${Capacity eq 3 ? 'selected' : ''}>3 People</option>
+                                            <option value="4" ${Capacity eq 4 ? 'selected' : ''}>More than 3 People</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="capacityFilter">Check-in Date</label>
+                                        <input type="date" class="form-control" id="checkInDateFilter" name="checkInDate" onchange="updateCheckOutDateMin()" value="${checkInDate}" required>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="capacityFilter">Check-out Date</label>
+                                        <input type="date" class="form-control" id="checkOutDateFilter" name="checkOutDate" onchange="updateCheckInDateMax()" value="${checkOutDate}" required>
+                                    </div>
+                                    <div class="col-md-3 d-flex justify-content-center">
+                                        <div>
+                                            <label class="d-block">&nbsp;</label>
+                                            <button type="submit" class="btn btn-primary btn-block ">Apply Filters</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -189,122 +217,68 @@
         </div>
         <!-- Breadcrumb Section End -->
 
-        <!-- About Us Page Section Begin -->
-        <section class="aboutus-page-section spad">
-            <div class="container">
-                <div class="about-page-text">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="ap-title">
-                                <h2>Welcome To Sona.</h2>
-                                <p>Built in 1910 during the Belle Epoque period, this hotel is located in the center of
-                                    Paris, with easy access to the city’s tourist attractions. It offers tastefully
-                                    decorated rooms.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 offset-lg-1">
-                            <ul class="ap-services">
-                                <li><i class="icon_check"></i> 20% Off On Accommodation.</li>
-                                <li><i class="icon_check"></i> Complimentary Daily Breakfast</li>
-                                <li><i class="icon_check"></i> 3 Pcs Laundry Per Day</li>
-                                <li><i class="icon_check"></i> Free Wifi.</li>
-                                <li><i class="icon_check"></i> Discount 20% On F&B</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-page-services">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="ap-service-item set-bg" data-setbg="img/about/about-p1.jpg">
-                                <div class="api-text">
-                                    <h3>Restaurants Services</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="ap-service-item set-bg" data-setbg="img/about/about-p2.jpg">
-                                <div class="api-text">
-                                    <h3>Travel & Camping</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="ap-service-item set-bg" data-setbg="img/about/about-p3.jpg">
-                                <div class="api-text">
-                                    <h3>Event & Party</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- About Us Page Section End -->
-
-        <!-- Video Section Begin -->
-        <section class="video-section set-bg" data-setbg="img/video-bg.jpg">
+        <!-- Rooms Section Begin -->
+        <section class="rooms-section spad">
             <div class="container">
                 <div class="row">
+                    <c:if test="${roomList.size() == 0}">
+                        <div class="col-lg-12 text-center" style="font-size: 50px; height: 600px; color: #aaaab3">
+                            No suitable room
+                        </div>
+                    </c:if>
+                    <c:forEach items="${requestScope.roomList}" var="room">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="room-item">
+                                <img src="${room.getImg()}" alt="" style="aspect-ratio: 1.5/1">
+                                <div class="ri-text">
+                                    <h4>${room.getName()}</h4>
+                                    <h3>${String.format("%,.0f", room.getPrice())} VND<span>/Pernight</span></h3>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="r-o">Size:</td>
+                                                <td>${room.getSize()} ft</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Capacity:</td>
+                                                <td>Max persion ${room.getCapacity()}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Bed:</td>
+                                                <td>${room.getBedSById().getBedName()}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Room left: </td>
+                                                <td>${room.getTotalRoom()}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Services:</td>
+                                                <td>${room.listServiceInString()}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a href="roomdetail?id=${room.getRID()}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&Capacity=${Capacity}" class="primary-btn">More Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>
                     <div class="col-lg-12">
-                        <div class="video-text">
-                            <h2>Discover Our Hotel & Services.</h2>
-                            <p>It S Hurricane Season But We Are Visiting Hilton Head Island</p>
-                            <a href="https://www.youtube.com/watch?v=EzKkl64rRbM" class="play-btn video-popup"><img
-                                    src="img/play.png" alt=""></a>
+                        <div class="room-pagination">
+                            <c:if test="${index ne 1 && roomList.size() ne 0}">
+                                <a href="listroom?index=${index -1}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&Capacity=${Capacity}">Previous <i class="fa fa-long-arrow-left"></i></a>
+                                </c:if>
+                                <c:forEach begin="1" end="${requestScope.endPage}" var="page">
+                                <a href="listroom?index=${page}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&Capacity=${Capacity}" ${page == index ? 'style="background-color: #DFA974; color: white"' : ''}>${page}</a>
+                            </c:forEach>
+                            <c:if test="${index ne endPage && roomList.size() ne 0}">
+                                <a href="listroom?index=${index + 1}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&Capacity=${Capacity}">Next <i class="fa fa-long-arrow-right"></i></a>
+                                </c:if>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Video Section End -->
-
-        <!-- Gallery Section Begin -->
-        <section class="gallery-section spad">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title">
-                            <span>Our Gallery</span>
-                            <h2>Discover Our Work</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="gallery-item set-bg" data-setbg="img/gallery/gallery-1.jpg">
-                            <div class="gi-text">
-                                <h3>Room Luxury</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="gallery-item set-bg" data-setbg="img/gallery/gallery-3.jpg">
-                                    <div class="gi-text">
-                                        <h3>Room Luxury</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="gallery-item set-bg" data-setbg="img/gallery/gallery-4.jpg">
-                                    <div class="gi-text">
-                                        <h3>Room Luxury</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="gallery-item large-item set-bg" data-setbg="img/gallery/gallery-2.jpg">
-                            <div class="gi-text">
-                                <h3>Room Luxury</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Gallery Section End -->
+        <!-- Rooms Section End -->
 
         <!-- Footer Section Begin -->
         <footer class="footer-section">
@@ -395,4 +369,55 @@
         <script src="js/main.js"></script>
     </body>
 
+    <script>
+            let inputCheckIn = document.getElementById('checkInDateFilter');
+            let inputcheckOut = document.getElementById('checkOutDateFilter');
+            
+            const today = new Date();
+            const year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let day = today.getDate();
+
+            // Add leading zero for single-digit months and days
+            month = month < 10 ? '0' + month : month;
+            day = day < 10 ? '0' + day : day;
+            let date = year + '-' + month + '-' + day;
+            inputCheckIn.min = date;
+            inputcheckOut.min = date;
+            if(inputCheckIn.value === null && inputCheckIn.value === '') {
+                inputCheckIn.value = date;
+                
+            }
+            if(inputcheckOut.value === null && inputcheckOut.value === '') {
+                inputCheckIn.value = date;
+                
+            }
+        </script>
+        
+        <script>
+            function updateCheckOutDateMin() {
+                // Get the selected checkInDate value
+                var checkInDate = document.getElementById('checkInDateFilter').value;
+
+                // Set the minimum checkOutDate value to checkInDate
+                var checkOutDate = document.getElementById('checkOutDateFilter');
+                checkOutDate.min = checkInDate;
+                if (checkOutDate.value < checkInDate) {
+                    checkOutDate.value = checkInDate;
+                }
+            }
+            
+            function updateCheckInDateMax() {
+                // Get the selected checkInDate value
+                var  checkOutDate= document.getElementById('checkOutDateFilter').value;
+
+                // Set the minimum checkOutDate value to checkInDate
+                var checkInDate = document.getElementById('checkInDateFilter');
+                checkInDate.max = checkInDate;
+                if (checkInDate.value > checkOutDate) {
+                    checkInDate.value = checkOutDate;
+                }
+            }
+        </script>
+    
 </html>

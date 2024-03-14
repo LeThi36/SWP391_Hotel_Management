@@ -1,3 +1,9 @@
+<%-- 
+    Document   : bookingroom
+    Created on : Jan 20, 2024, 8:16:45 PM
+    Author     : PC
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -75,9 +81,6 @@
             margin-bottom: 24px;
             resize: none;
         }
-        #show:hover {
-            cursor: pointer
-        }
     </style>
 </head>
 
@@ -105,18 +108,20 @@
                 <div class="check-date" style="display: flex; justify-content: space-between;">
                     <div class="date">
                         <label for="date-in">Check In:</label>
-                        <input type="date" name="checkIn" id="date-in" value="${checkIn}" readonly>
+                        <input type="text" class="date-input" name="checkIn" id="date-in" value="${checkIn}">
+                        <i class="icon_calendar" style="text-align: right; right: 57%;"></i>
                     </div>
                     <div class="date">
                         <label for="date-out">Check Out:</label>
-                        <input type="date"name="checkOut" id="date-out" value="${checkOut}" readonly>
+                        <input type="text" class="date-input" name="checkOut" id="date-out" value="${checkOut}">
+                        <i class="icon_calendar"></i>
                     </div>
                 </div>
                 <div class="check-date">
                     <label for="date-out">Room information:</label>
                     <input type="hidden" class="date-input" id="date-out" name="id" value="${room.getRID()}" >
                     <input type="text" id="date-out" value="${room.getName()}" readonly>
-                        <i id="show" class='bx bx-show' onclick="window.location.href = 'roomdetail?id=${room.getRID()}&checkInDate=${checkIn}&checkOutDate=${checkOut}&Capacity=0'"></i>
+                        <i id="show" class='bx bx-show' onclick=""></i>
                 </div>
                 <div class="select-option">
                     <label for="guest">Guests:</label>
@@ -135,15 +140,6 @@
                     <input id="phone" type="text" placeholder="Phonenumber" value="${phone}" readonly style="color: #19191a">
                 </div>
                 <div class="select-option">
-                    <label>Services Include: </label>
-                    <c:forEach items="${listService}" var="sv">
-                        <div style="background-color: white; font-weight: bold; padding: 10px; width: fit-content; display: inline-block">
-                            ${sv.getServiceName()}
-                             <input type="hidden" name="svId" value="${sv.getSeID()}">
-                        </div>
-                    </c:forEach>
-                </div>
-                <div class="select-option">
                     <label for="payment">Payment Method:</label>
                     <select id="payment">
                         <option value="">VNPAY</option>
@@ -159,8 +155,8 @@
                 </div>
                 
                 <div class="select-option d-flex justify-content-end" >
-                    <p class="text-left" style="width: fit-content">Total: ${String.format("%,.0f", numRoom * room.getPrice())}</p>
-                    <input type="hidden" name="amount" value="${String.format("%,.0f", numRoom * room.getPrice())}">
+                    <p class="text-left" style="width: fit-content">Total: ${numRoom* 10000}</p>
+                    <input type="hidden" name="amount" value="${numRoom* 10000}">
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center;">
