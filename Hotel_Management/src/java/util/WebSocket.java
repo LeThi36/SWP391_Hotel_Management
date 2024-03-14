@@ -32,14 +32,7 @@ public class WebSocket {
 
     @OnMessage
     public void onMessage(@PathParam("conversationId") String conversationId, String msg, Session session) {
-        
-        Message message = new Message();
-        message.setMessage(msg);
-        message.setConversationId(Integer.parseInt(conversationId));
-        
-        new MessageDAO().addMessage(message);
-        
-        broadcast(conversationId, msg, session);
+        broadcast(conversationId, message, session);
     }
 
     @OnClose

@@ -19,7 +19,6 @@
                 border-radius: 5px;
                 overflow: hidden;
                 position: relative;
-                width: 80%;
             }
             .chat-messages {
                 height: 60vh;
@@ -39,7 +38,7 @@
                 bottom: 0;
                 height: 7vh;
             }
-
+            
             .input-group *{
                 height: 7vh;
             }
@@ -75,24 +74,20 @@
 
         <div class="container profile-container">
             <h1 class="text-center mb-4 mt-5">Chat with Receptionist</h1>
-
+            
             <div class="chat-container">
-
+                
                 <div class="chat-messages" id="chatMessages">
-
-                    <c:forEach var="message" items="${listMessage}">
-                        <div class="message">${message.message}</div>
-                    </c:forEach>
-
+                    <!-- Chat messages will be displayed here -->
                 </div>
-
+                
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Type your message" id="messageInput">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button" onclick="sendMessage()">Send</button>
                     </div>
                 </div>
-
+                
             </div>
         </div>
 
@@ -111,10 +106,10 @@
                                 var message = messageInput.value.trim();
                                 if (message !== "") {
                                     // Display the message locally
-                                    displayMessage('${username ne null ? 'You' : 'Receptionist'}: ' + message);
+                                    displayMessage("You: " + message);
 
                                     // Send the message over WebSocket
-                                    ws.send('${username ne null ? username : 'Receptionist'}: ' + message);
+                                    ws.send('${user ne null ? user.fullName : 'Receptionist'}: ' + message);
                                     messageInput.value = "";
                                 }
                             }
