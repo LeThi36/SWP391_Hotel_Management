@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
 import java.util.Date;
@@ -9,9 +13,23 @@ public class Invoices {
     private Date CheckInDate;
     private Date CheckOutDate;
     private int ReservationStatus;
+    private int numberPerson;
+    private int numberRoom;
+    private String note;
+    private String transactionCode;
 
     // Constructors, getters, setters, and other methods
 
+    public String getTransactionCode() {
+        return transactionCode;
+    }
+
+    public void setTransactionCode(String transactionCode) {
+        this.transactionCode = transactionCode;
+    }
+
+    
+    
     public int getInID() {
         return InID;
     }
@@ -59,4 +77,37 @@ public class Invoices {
     public void setReservationStatus(int reservationStatus) {
         ReservationStatus = reservationStatus;
     }
+
+    public int getNumberPerson() {
+        return numberPerson;
+    }
+
+    public void setNumberPerson(int numberPerson) {
+        this.numberPerson = numberPerson;
+    }
+
+    public int getNumberRoom() {
+        return numberRoom;
+    }
+
+    public void setNumberRoom(int numberRoom) {
+        this.numberRoom = numberRoom;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoices{" + "InID=" + InID + ", UserID=" + UserID + ", RoomID=" + RoomID + ", CheckInDate=" + CheckInDate + ", CheckOutDate=" + CheckOutDate + ", ReservationStatus=" + ReservationStatus + ", numberPerson=" + numberPerson + ", numberRoom=" + numberRoom + ", note=" + note + ", transactionCode=" + transactionCode + '}';
+    }
+
+  
+    
+    
 }

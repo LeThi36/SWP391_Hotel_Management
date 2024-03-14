@@ -6,7 +6,6 @@ package controller;
 
 import com.google.gson.JsonObject;
 import dao.InvoicesDAO;
-import dao.ServiceDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -26,14 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import model.Invoices;
-import model.Servicess;
 import model.User;
 import vnpay.Config;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "PaymentController", urlPatterns = {"/payment"})
 public class PaymentController extends HttpServlet {
 
@@ -133,29 +127,34 @@ public class PaymentController extends HttpServlet {
         //Get bill Date
         SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String payDate = formatter2.format(cld.getTime());
-
+        
+        
         String checkIn = request.getParameter("checkIn");
         String checkOut = request.getParameter("checkOut");
         String numPeople_raw = request.getParameter("numPeople");
         String numRoom_raw = request.getParameter("numRoom");
         String note = request.getParameter("note");
         String id_raw = request.getParameter("id");
+        
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         // Specify the input date format
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd MMMM, yyyy");
 
+        
         System.out.println("checkIn: " + checkIn);
         System.out.println("checkOut: " + checkOut);
         System.out.println("numPeople_raw: " + numPeople_raw);
         System.out.println("numRoom_raw: " + numRoom_raw);
         System.out.println("note: " + note);
         System.out.println("id_raw: " + id_raw);
-
+        
+        
         //Create bill
         try {
             int numPeople = Integer.parseInt(numPeople_raw);
             int numRoom = Integer.parseInt(numRoom_raw);
             int id = Integer.parseInt(id_raw);
-
+            
             Invoices invoice = new Invoices();
             Date date = inputFormat.parse(checkIn);
             invoice.setCheckInDate(date);
@@ -173,15 +172,13 @@ public class PaymentController extends HttpServlet {
             System.out.println("nam2");
             System.out.println(invoice);
             new InvoicesDAO().createNewInvoice(invoice);
-
-            String[] skillIds = request.getParameterValues("svId");
-            new InvoicesDAO().insertDetail(skillIds, vnp_TxnRef);
-
         } catch (Exception e) {
             System.out.println("PaymentController: " + e.getMessage());
         }
         respone.sendRedirect(paymentUrl);
-
+        
     }
+    
+    
 
 }
