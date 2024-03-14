@@ -10,10 +10,23 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: var(--main-color);">
     <div class="container">
-        <a class="navbar-brand" href="home">Hotel Booking</a>
+         <a class="navbar-brand" href="home">🏨</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
+        <div class="dropdown show text-light">
+            <a class="text-light text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                System Management
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="user">User Management</a>
+                <a class="dropdown-item" href="room">Room Management</a>
+                <a class="dropdown-item" href="service">Service Management</a>
+            </div>
+        </div>
+        
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
 

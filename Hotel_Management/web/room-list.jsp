@@ -9,13 +9,19 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <!-- Add DataTables CSS link -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+        
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+        </style>
     </head>
     <body>
 
         <%@ include file="header.jsp"%>
 
         <div class="container profile-container">
-            <h1 class="text-center mb-4">Room Management</h1>
+            <h1 class="text-center mb-4 mt-5">Room Management</h1>
 
             <table id="roomTable" class="table table-striped table-bordered">
                 <thead>
@@ -40,8 +46,9 @@
                             <td>${room.status}</td>
                             <td>
                                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#roomEditModal${room.RID}">
-                                    View Details
+                                    Edit
                                 </button>
+                                <a class="btn btn-secondary" href="service?id=${room.RID}">Services</a>
                             </td>
                         </tr>
 
