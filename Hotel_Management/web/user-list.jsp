@@ -15,7 +15,7 @@
         <%@ include file="header.jsp"%>
 
         <div class="container profile-container">
-            <h1 class="text-center mb-4 mt-5">Receptionist Management</h1>
+            <h1 class="text-center mb-4 mt-5">User Management</h1>
 
             <c:if test="${param.success ne null}">
                 <div class="alert alert-success" role="alert">
@@ -39,6 +39,7 @@
                 <thead>
                     <tr>
                         <th>User ID</th>
+                        <th>Role</th>
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -49,25 +50,22 @@
                 </thead>
                 <tbody>
                     <c:forEach var="user" items="${userList}">
-                        <c:if test="${user.role eq 2}">
-                            <tr>
-                                <td>${user.userId}</td>
-                                <td>${user.fullName}</td>
-                                <td>${user.email}</td>
-                                <td>${user.phone}</td>
-                                <td>${user.gender=="1" ? "Male" : "Female"}</td>
-                                <td>${user.dob}</td>
-                                <td>
-                                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editModal${user.userId}">
-                                        Edit
-                                    </button>
-        <!--                                <a href="user?action=ban&userId=${user.userId}&status=false" class="btn btn-danger btn-sm">Ban</a>
-                                    <a href="user?action=ban&userId=${user.userId}&status=true" class="btn btn-danger btn-sm">Unban</a>-->
-                                </td>
-                            </tr>
-                        </c:if>
-
-
+                        <tr>
+                            <td>${user.userId}</td>
+                            <td>${user.role=="0" ? "User" : "Admin"}</td>
+                            <td>${user.fullName}</td>
+                            <td>${user.email}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.gender=="1" ? "Male" : "Female"}</td>
+                            <td>${user.dob}</td>
+                            <td>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#editModal${user.userId}">
+                                    Edit
+                                </button>
+<!--                                <a href="user?action=ban&userId=${user.userId}&status=false" class="btn btn-danger btn-sm">Ban</a>
+                                <a href="user?action=ban&userId=${user.userId}&status=true" class="btn btn-danger btn-sm">Unban</a>-->
+                            </td>
+                        </tr>
 
                         <!-- Edit Modal for each user -->
                     <div class="modal fade" id="editModal${user.userId}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel${user.userId}" aria-hidden="true">
@@ -117,7 +115,6 @@
                                             <select class="form-control" name="role" required>
                                                 <option value="1" ${user.role == 1 ? 'selected' : ''}>Admin</option>
                                                 <option value="0" ${user.role == 0 ? 'selected' : ''}>User</option>
-                                                <option value="2" ${user.role == 2 ? 'selected' : ''}>Receptionist</option>
                                             </select>
                                         </div>
 
@@ -181,13 +178,13 @@
                                 <input type="date" class="form-control" name="dob" required>
                             </div>
 
-<!--                            <div class="form-group">
+                            <div class="form-group">
                                 <label for="role">Role:</label>
                                 <select class="form-control" name="role" required>
                                     <option value="0">User</option>
                                     <option value="1">Admin</option>
                                 </select>
-                            </div>-->
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Create User</button>
                         </form>
