@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller;
 
 import dao.RoomDAO;
@@ -18,10 +13,7 @@ import java.util.Date;
 import java.util.List;
 import model.Rooms;
 
-/**
- *
- * @author Admin
- */
+
 @WebServlet(name="ListAllRoomController", urlPatterns={"/listroom"})
 public class ListAllRoomController extends HttpServlet {
    
