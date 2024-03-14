@@ -20,6 +20,8 @@ public class ServiceDAO extends DBContext {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            
+
             while (resultSet.next()) {
                 Servicess service = Servicess.createFromResultSet(resultSet);
                 serviceList.add(service);
@@ -28,8 +30,9 @@ public class ServiceDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("getTopServices: " + e.getMessage());
         }
-
+        
         return serviceList;
+       
     }
 
     public List<Servicess> getServicesByRoomId(int roomId) {
@@ -54,6 +57,7 @@ public class ServiceDAO extends DBContext {
         }
 
         return serviceList;
+    
     }
 
     public List<Servicess> getServices() {

@@ -1,6 +1,8 @@
 package model;
 
 import dao.BedDAO;
+import dao.ServiceDAO;
+import java.util.List;
 
 public class Rooms {
     private int RID;
@@ -10,7 +12,10 @@ public class Rooms {
     private int Capacity;
     private String Img;
     private int Status;
+    private String detail;
     private int BID; 
+    
+    List<Servicess> listService;
 
     public int getRID() {
         return RID;
@@ -80,6 +85,39 @@ public class Rooms {
     public BedS getBedSById() {
         return new BedDAO().getBedById(BID);
     }
+    
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public List<Servicess> getListService() {
+        return listService;
+    }
+
+    public void setListService(List<Servicess> listService) {
+        this.listService = listService;
+    }
+
+    public List<Servicess> getListServiceByRoomId() {
+        return new ServiceDAO().getServicesByRoomId(RID);
+    }
+
+    public String listServiceInString() {
+        List<Servicess> list = getListServiceByRoomId();
+        int size = list.size();
+        int count = 0;
+        String listServiceString = "";
+        for (Servicess servicess : list) {
+
+            listServiceString+= servicess.getServiceName();
+            count++;
+            if(count != size) {
+                listServiceString += " ,";
+            }
+        }
+        return listServiceString;
+    }
+
 
     @Override
     public String toString() {
