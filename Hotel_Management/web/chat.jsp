@@ -19,6 +19,7 @@
                 border-radius: 5px;
                 overflow: hidden;
                 position: relative;
+                width: 80%;
             }
             .chat-messages {
                 height: 60vh;
@@ -79,6 +80,10 @@
                 
                 <div class="chat-messages" id="chatMessages">
                     <!-- Chat messages will be displayed here -->
+                    <c:forEach var="message" items="${listMessage}">
+                        <div class="message">${message.message}</div>
+                    </c:forEach>
+                        
                 </div>
                 
                 <div class="input-group">
@@ -106,10 +111,10 @@
                                 var message = messageInput.value.trim();
                                 if (message !== "") {
                                     // Display the message locally
-                                    displayMessage("You: " + message);
+                                    displayMessage('${username ne null ? 'You' : 'Receptionist'}: ' + message);
 
                                     // Send the message over WebSocket
-                                    ws.send('${user ne null ? user.fullName : 'Receptionist'}: ' + message);
+                                    ws.send('${username ne null ? username : 'Receptionist'}: ' + message);
                                     messageInput.value = "";
                                 }
                             }

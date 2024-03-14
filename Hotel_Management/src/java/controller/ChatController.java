@@ -1,5 +1,6 @@
 package controller;
 
+import dao.MessageDAO;
 import dao.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -29,10 +30,11 @@ public class ChatController extends HttpServlet {
             User user = new UserDAO().readUserByUsername(userSession.getEmail());
             
             conversationId = user.getUserId()+"";
-            request.setAttribute("user", user);
+            request.setAttribute("username", user.getFullName());
         }
         
         request.setAttribute("conversationId", conversationId);
+        request.setAttribute("listMessage", new MessageDAO().getMessagesByConversationId(Integer.parseInt(conversationId)));
         
         request.getRequestDispatcher("chat.jsp").forward(request, response);
         
