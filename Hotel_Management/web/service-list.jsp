@@ -58,7 +58,47 @@
                         <!-- Edit Modal for each service -->
                     <div class="modal fade" id="editModal${service.seID}" tabindex="-1" role="dialog"
                          aria-labelledby="editModalLabel${service.seID}" aria-hidden="true">
-                        <!-- Modal content here... -->
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalLabel${service.seID}">Edit Service</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="service?action=update" method="post">
+                                        <input type="hidden" name="action" value="update">
+                                        <input type="hidden" name="seID" value="${service.seID}">
+
+                                        <div class="form-group">
+                                            <label for="serviceName">Service Name:</label>
+                                            <input type="text" class="form-control" name="serviceName" value="${service.serviceName}" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="status">Status:</label>
+                                            <select class="form-control" name="status" required>
+                                                <option value="1" ${service.status == 1 ? 'selected' : ''}>Visible</option>
+                                                <option value="0" ${service.status == 0 ? 'selected' : ''}>Hidden</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="icon">Image:</label>
+                                            <input type="text" class="form-control" name="icon" value="${service.icon}" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="description">Description:</label>
+                                            <textarea class="form-control" name="description" rows="4" required>${service.description}</textarea>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </c:forEach>
                 </tbody>
@@ -66,7 +106,46 @@
 
             <!-- Add Service Modal -->
             <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-                <!-- Modal content here... -->
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addModalLabel">Add Service</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="service?action=add" method="post">
+                                <input type="hidden" name="action" value="add">
+
+                                <div class="form-group">
+                                    <label for="serviceName">Service Name:</label>
+                                    <input type="text" class="form-control" name="serviceName" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="status">Status:</label>
+                                    <select class="form-control" name="status" required>
+                                        <option value="1">Visible</option>
+                                        <option value="0">Hidden</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" style="display: none">
+                                    <label for="icon">Image:</label>
+                                    <input type="text" class="form-control" name="icon">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description">Description:</label>
+                                    <textarea class="form-control" name="description" rows="4" required></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Add Service</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
