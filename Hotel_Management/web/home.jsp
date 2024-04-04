@@ -26,6 +26,17 @@
         <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+        <style>
+            .select-option input[type = text] {
+                width: 100%;
+                height: 50px;
+                border: 1px solid #e5e5e5;
+                font-size: 16px;
+                color: #aaaab3;
+                padding-left: 20px;
+                margin-bottom: 25px;
+            }
+        </style>
     </head>
 
     <body>
@@ -63,16 +74,7 @@
                 <ul>
                     <li class="active"><a href="./index.html">Home</a></li>
                     <li><a href="./rooms.html">Rooms</a></li>
-                    <li><a href="./about-us.html">About Us</a></li>
-                    <li><a href="./pages.html">Pages</a>
-                        <ul class="dropdown">
-                            <li><a href="./room-details.html">Room Details</a></li>
-                            <li><a href="#">Deluxe Room</a></li>
-                            <li><a href="#">Family Room</a></li>
-                            <li><a href="#">Premium Room</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="./blog.html">News</a></li>
+                    <li><a href="./about-us.jsp">About Us</a></li>
                     <li><a href="./contact.jsp">Contact</a></li>
                 </ul>
             </nav>
@@ -103,8 +105,8 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="tn-right">
-                                
-                                <a href="#" class="bk-btn">Booking Now</a>
+
+                                <a href="listroom" class="bk-btn">Booking Now</a>
                                 <div class="language-option">
                                     <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="">
                                     <c:if test="${sessionScope.User != null}">
@@ -118,6 +120,9 @@
                                         <ul>
                                             <c:if test="${sessionScope.User != null}">
                                                 <li><a href="profile">Profile</a></li>
+                                                <li><a href="listbooked">Booked</a></li> 
+                                                <li><a href="cart">Cart</a></li> 
+                                                <li><a href="historybooking">Invoice Active</a></li> 
                                                 <li><a href="log">Logout</a></li>
                                             </c:if>
                                             <c:if test="${sessionScope.User eq null}">
@@ -136,7 +141,7 @@
                     <div class="row">
                         <div class="col-lg-2">
                             <div class="logo">
-                                <a href="./index.html">
+                                <a href="home">
                                     <img src="img/logo.png" alt="">
                                 </a>
                             </div>
@@ -145,18 +150,9 @@
                             <div class="nav-menu">
                                 <nav class="mainmenu">
                                     <ul>
-                                        <li class="active"><a href="./index.html">Home</a></li>
-                                        <li><a href="./rooms.html">Rooms</a></li>
-                                        <li><a href="./about-us.html">About Us</a></li>
-                                        <li><a href="./pages.html">Pages</a>
-                                            <ul class="dropdown">
-                                                <li><a href="./room-details.html">Room Details</a></li>
-                                                <li><a href="./blog-details.html">Blog Details</a></li>
-                                                <li><a href="#">Family Room</a></li>
-                                                <li><a href="#">Premium Room</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="./blog.html">News</a></li>
+                                        <li class="active"><a href="home">Home</a></li>
+                                        <li><a href="listroom">Rooms</a></li>
+                                        <li><a href="./about-us.jsp">About Us</a></li>
                                         <li><a href="./contact.jsp">Contact</a></li>
                                     </ul>
                                 </nav>
@@ -171,59 +167,53 @@
         </header>
         <!-- Header End -->
 
-        <!-- Hero Section Begin -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero-text">
-                            <h1>Sona A Luxury Hotel</h1>
-                            <p>Here are the best hotel booking sites, including recommendations for international
-                                travel and for finding low-priced hotel rooms.</p>
-                            <a href="#" class="primary-btn">Discover Now</a>
-                        </div>
+       <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="hero-text">
+                        <h1>Sona A Luxury Hotel</h1>
+                        <p>Here are the best hotel booking sites, including recommendations for international
+                            travel and for finding low-priced hotel rooms.</p>
+                        <a href="#" class="primary-btn">Discover Now</a>
                     </div>
-                    <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
-                        <div class="booking-form">
-                            <h3>Booking Your Hotel</h3>
-                            <form action="#">
-                                <div class="check-date">
-                                    <label for="date-in">Check In:</label>
-                                    <input type="text" class="date-input" id="date-in">
-                                    <i class="icon_calendar"></i>
-                                </div>
-                                <div class="check-date">
-                                    <label for="date-out">Check Out:</label>
-                                    <input type="text" class="date-input" id="date-out">
-                                    <i class="icon_calendar"></i>
-                                </div>
-                                <div class="select-option">
-                                    <label for="guest">Guests:</label>
-                                    <select id="guest">
-                                        <option value="">2 Adults</option>
-                                        <option value="">3 Adults</option>
-                                    </select>
-                                </div>
-                                <div class="select-option">
-                                    <label for="room">Room:</label>
-                                    <select id="room">
-                                        <option value="">1 Room</option>
-                                        <option value="">2 Room</option>
-                                    </select>
-                                </div>
-                                <button type="submit">Check Availability</button>
-                            </form>
-                        </div>
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
+                    <div class="booking-form">
+                        <h3>Booking Your Hotel</h3>
+                        <form action="listroom" class="ra-form">
+                            <div class="check-date">
+                                <label for="date-in">Check In:</label>
+                                <input type="text" class="date-input" id="date-in" name="checkInDate" required>
+                                <i class="icon_calendar"></i>
+                            </div>
+                            <div class="check-date">
+                                <label for="date-out">Check Out:</label>
+                                <input type="text" class="date-input" id="date-out" name="checkOutDate" required>
+                                <i class="icon_calendar"></i>
+                            </div>
+                            <div class="select-option">
+                                <label for="guest">Capacity:</label>
+                                <select id="guest" name="Capacity">
+                                    <option value="2">2 People</option>
+                                    <option value="3">3 People</option>
+                                    <option value="4">More than 3 People</option>
+                                </select>
+                            </div>
+                            <button type="submit">Check Availability</button>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="hero-slider owl-carousel">
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
-                <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
-            </div>
-        </section>
-        <!-- Hero Section End -->
+        </div>
+        <div class="hero-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
 
         <!-- About Us Section Begin -->
         <section class="aboutus-section spad">
@@ -320,7 +310,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <a href="#" class="primary-btn">More Details</a>
+                                        <a href="roomdetail?id=${room.getRID()}" class="primary-btn">More Details</a>
                                     </div>
                                 </div>
                             </div>
@@ -475,4 +465,21 @@
         <script src="js/main.js"></script>
     </body>
 
+    <script>
+            let inputCheckIn = document.getElementById('date-in');
+            let inputcheckOut = document.getElementById('date-out');
+            
+            const today = new Date();
+            const year = today.getFullYear();
+            let month = today.getMonth() + 1;
+            let day = today.getDate();
+
+            // Add leading zero for single-digit months and days
+            month = month < 10 ? '0' + month : month;
+            day = day < 10 ? '0' + day : day;
+            let date = year + '-' + month + '-' + day;
+
+            inputCheckIn.value = date;
+            inputcheckOut.value = date;
+        </script>
 </html>

@@ -4,10 +4,16 @@
  */
 package model;
 
-import java.util.Date;
 import dao.RoomDAO;
 import dao.UserDAO;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
+/**
+ *
+ * @author Admin
+ */
 public class Invoices {
     private int InID;
     private int UserID; // Foreign key referencing Users(UserID)
@@ -19,19 +25,56 @@ public class Invoices {
     private int numberRoom;
     private String note;
     private String transactionCode;
+    
+    private double total;
+    private List<Servicess> listService;
+    private boolean isEnded;
+    
 
     // Constructors, getters, setters, and other methods
 
+    public boolean isIsEnded() {
+        return isEnded;
+    }
+
+    public void setIsEnded(boolean isEnded) {
+        this.isEnded = isEnded;
+    }
+
+    
+    public Date getCheckOutDateInTypeDate() {
+        return this.CheckOutDate;
+    }
+    
+    
+    
+    public List<Servicess> getListService() {
+        return listService;
+    }
+
+    public void setListService(List<Servicess> listService) {
+        this.listService = listService;
+    }
+
+    
+    
     public String getTransactionCode() {
         return transactionCode;
     }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+    
 
     public void setTransactionCode(String transactionCode) {
         this.transactionCode = transactionCode;
     }
 
-    
-    
     public int getInID() {
         return InID;
     }
@@ -56,16 +99,16 @@ public class Invoices {
         RoomID = roomID;
     }
 
-    public Date getCheckInDate() {
-        return CheckInDate;
+    public String getCheckInDate() {
+        return new SimpleDateFormat("yyyy-MM-dd").format(CheckInDate);
     }
 
     public void setCheckInDate(Date checkInDate) {
         CheckInDate = checkInDate;
     }
 
-    public Date getCheckOutDate() {
-        return CheckOutDate;
+    public String getCheckOutDate() {
+        return new SimpleDateFormat("yyyy-MM-dd").format(CheckOutDate);
     }
 
     public void setCheckOutDate(Date checkOutDate) {
@@ -103,10 +146,11 @@ public class Invoices {
     public void setNote(String note) {
         this.note = note;
     }
-        public User getUser() {
+    
+    public User getUser() {
         return new UserDAO().readUserById(UserID);
     }
-
+    
     public Rooms getRoom() {
         return new RoomDAO().getRoomById(RoomID);
     }
