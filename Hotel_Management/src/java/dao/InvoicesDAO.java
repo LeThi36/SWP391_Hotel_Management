@@ -7,13 +7,16 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Invoices;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
 
-public class InvoicesDAO extends DAL.DBContext{
+public class InvoicesDAO extends DAL.DBContext {
     public void createNewInvoice(Invoices invoice) {
-        String insertQuery = "INSERT INTO INVOICES (UserID, RoomID, CheckInDate, CheckOutDate, ReservationStatus, " +
-                             "NumberPerson, NumberRooms, Note, transactionCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO INVOICES (UserID, RoomID, CheckInDate, CheckOutDate, ReservationStatus, "
+                + "NumberPerson, NumberRooms, Note, transactionCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
+    try ( PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             // Set values for the parameters using the Invoice object
             preparedStatement.setInt(1, invoice.getUserID());
@@ -41,7 +44,7 @@ public class InvoicesDAO extends DAL.DBContext{
     public boolean updateInvoiceStatusByTransactionCode(String transactionCode) {
         String updateQuery = "UPDATE INVOICES SET ReservationStatus = 1 WHERE TransactionCode = ?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
             
             preparedStatement.setString(1, transactionCode);
 
@@ -53,5 +56,33 @@ public class InvoicesDAO extends DAL.DBContext{
             System.out.println("updateInvoiceStatusByTransactionCode: " + e.getMessage());
             return false;
         }
+    }
+      public List<Invoices> getAllInvoices() {
+        List<Invoices> invoicesList = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM INVOICES";
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(selectQuery)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Invoices invoice = new Invoices();
+                invoice.setUserID(resultSet.getInt("UserID"));
+                invoice.setRoomID(resultSet.getInt("RoomID"));
+                invoice.setCheckInDate(resultSet.getDate("CheckInDate"));
+                invoice.setCheckOutDate(resultSet.getDate("CheckOutDate"));
+                invoice.setReservationStatus(resultSet.getInt("ReservationStatus"));
+                invoice.setNumberPerson(resultSet.getInt("NumberPerson"));
+                invoice.setNumberRoom(resultSet.getInt("NumberRooms"));
+                invoice.setNote(resultSet.getString("Note"));
+                invoice.setTransactionCode(resultSet.getString("transactionCode"));
+
+                invoicesList.add(invoice);
+            }
+        } catch (SQLException ex) {
+            System.out.println("getAllInvoices: " + ex.getMessage());
+        }
+
+        return invoicesList;
     }
 }

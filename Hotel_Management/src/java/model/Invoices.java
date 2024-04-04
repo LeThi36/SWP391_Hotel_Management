@@ -5,6 +5,8 @@
 package model;
 
 import java.util.Date;
+import dao.RoomDAO;
+import dao.UserDAO;
 
 public class Invoices {
     private int InID;
@@ -100,6 +102,13 @@ public class Invoices {
 
     public void setNote(String note) {
         this.note = note;
+    }
+        public User getUser() {
+        return new UserDAO().readUserById(UserID);
+    }
+
+    public Rooms getRoom() {
+        return new RoomDAO().getRoomById(RoomID);
     }
 
     @Override

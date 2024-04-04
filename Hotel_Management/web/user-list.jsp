@@ -112,14 +112,7 @@
                                             <input type="date" class="form-control" name="dob" value="${user.dob}" required>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="role">Role:</label>
-                                            <select class="form-control" name="role" required>
-                                                <option value="1" ${user.role == 1 ? 'selected' : ''}>Admin</option>
-                                                <option value="0" ${user.role == 0 ? 'selected' : ''}>User</option>
-                                                <option value="2" ${user.role == 2 ? 'selected' : ''}>Receptionist</option>
-                                            </select>
-                                        </div>
+                                        <input type="hidden" class="form-control" name="role" value="${user.role}">
 
                                         <button type="submit" class="btn btn-primary">Update</button>
                                     </form>

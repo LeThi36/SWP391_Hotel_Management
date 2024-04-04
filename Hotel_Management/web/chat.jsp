@@ -39,7 +39,7 @@
                 bottom: 0;
                 height: 7vh;
             }
-
+            
             .input-group *{
                 height: 7vh;
             }
@@ -75,24 +75,24 @@
 
         <div class="container profile-container">
             <h1 class="text-center mb-4 mt-5">Chat with Receptionist</h1>
-
+            
             <div class="chat-container">
-
+                
                 <div class="chat-messages" id="chatMessages">
-
+                    <!-- Chat messages will be displayed here -->
                     <c:forEach var="message" items="${listMessage}">
                         <div class="message">${message.message}</div>
                     </c:forEach>
-
+                        
                 </div>
-
+                
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Type your message" id="messageInput">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button" onclick="sendMessage()">Send</button>
                     </div>
                 </div>
-
+                
             </div>
         </div>
 

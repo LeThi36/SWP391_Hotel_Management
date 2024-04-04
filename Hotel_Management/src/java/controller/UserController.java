@@ -1,3 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+
 package controller;
 
 import dao.UserDAO;
@@ -11,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import util.PasswordUtil;
 import model.User;
-
 
 @WebServlet(name="UserController", urlPatterns={"/user"})
 public class UserController extends HttpServlet {
@@ -73,6 +77,7 @@ public class UserController extends HttpServlet {
 
     private void createUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        String role = request.getParameter("role");
         String phonenumber = request.getParameter("phonenumber");
         String password = request.getParameter("password");
         String fullName = request.getParameter("fullName");
@@ -80,6 +85,7 @@ public class UserController extends HttpServlet {
         String gender = request.getParameter("gender");
         String dob = request.getParameter("dob");
 
+        // Perform any validation if needed
 
         int userId = userDAO.createUser("2", phonenumber, (new PasswordUtil()).hashPasswordMD5(password), fullName, email, gender, dob);
 
@@ -110,6 +116,7 @@ public class UserController extends HttpServlet {
         String gender = request.getParameter("gender");
         String dob = request.getParameter("dob");
 
+        // Perform any validation if needed
 
         User user = new User(userId, Integer.parseInt(role), password, fullName, email, phonenumber, gender, dob);
         userDAO.updateUser(user);
@@ -127,7 +134,7 @@ public class UserController extends HttpServlet {
         String gender = request.getParameter("gender");
         String dob = request.getParameter("dob");
 
-  
+        // Perform any validation if needed
 
         User user = new User(userId, Integer.parseInt(role), password, fullName, email, phonenumber, gender, dob);
         userDAO.updateUser(user);

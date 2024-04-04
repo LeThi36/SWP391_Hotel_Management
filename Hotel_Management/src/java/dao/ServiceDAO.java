@@ -20,6 +20,8 @@ public class ServiceDAO extends DBContext {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            
+
             while (resultSet.next()) {
                 Servicess service = Servicess.createFromResultSet(resultSet);
                 serviceList.add(service);
@@ -28,8 +30,9 @@ public class ServiceDAO extends DBContext {
         } catch (SQLException e) {
             System.out.println("getTopServices: " + e.getMessage());
         }
-
+        
         return serviceList;
+       
     }
 
     public List<Servicess> getServicesByRoomId(int roomId) {
@@ -54,8 +57,10 @@ public class ServiceDAO extends DBContext {
         }
 
         return serviceList;
+    
     }
 
+    
     public List<Servicess> getServices() {
         List<Servicess> serviceList = new ArrayList<>();
 
@@ -98,23 +103,6 @@ public class ServiceDAO extends DBContext {
         }
     }
 
-    public Servicess getServiceById(int serviceId) {
-        Servicess service = null;
-        try {
-            String query = "SELECT * FROM Servicess WHERE SeID = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, serviceId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                service = Servicess.createFromResultSet(resultSet);
-            }
-        } catch (SQLException e) {
-            System.out.println("getServiceById: " + e.getMessage());
-        }
-        return service;
-    }
-
     public boolean addService(Servicess service) {
         try {
             String query = "INSERT INTO Servicess (ServiceName, Status, Icon, Description) "
@@ -133,4 +121,6 @@ public class ServiceDAO extends DBContext {
             return false;
         }
     }
+
+    
 }

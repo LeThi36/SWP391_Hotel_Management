@@ -113,7 +113,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="bid">Building ID:</label>
+                                            <label for="bid">Bed number (1-4):</label>
                                             <input type="number" class="form-control" name="bid" value="${room.BID}" required>
                                         </div>
 
@@ -172,7 +172,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="bid">Building ID:</label>
+                                <label for="bid">Bed number (1-4):</label>
                                 <input type="number" class="form-control" name="bid" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Add Room</button>

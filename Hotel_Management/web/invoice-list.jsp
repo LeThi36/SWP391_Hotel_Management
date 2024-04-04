@@ -29,7 +29,7 @@
                 </div>
             </c:if>
 
-            <!-- Add Invoice Butto -->
+            <!-- Add Invoice Button -->
             <div class="w-100" style="text-align: end;">
                 <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addInvoiceModal">
                     Add Invoice
@@ -45,7 +45,7 @@
                         <th>Check-In Date</th>
                         <th>Check-Out Date</th>
                         <th>Number of Persons</th>
-                        <th>Status</th>
+                        <th>Note</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -58,10 +58,10 @@
                             <td>${invoice.checkInDate}</td>
                             <td>${invoice.checkOutDate}</td>
                             <td>${invoice.numberPerson}</td>
-                            <td>${invoice.reservationStatus == 1 ? 'Pending' : 'Success'}</td>
+                            <td>${invoice.note}</td>
                             <td>
-                                <c:if test="${invoice.reservationStatus == 1}">
-                                    <a href="invoice?action=update&id=${invoice.inID}">Accept</a>
+                                <c:if test="${invoice.reservationStatus}">
+                                    <a href="invoice?action=update&">Accecpt</a>
                                 </c:if>
                             </td>
                         </tr>
@@ -88,22 +88,13 @@
 
                             <div class="form-group">
                                 <label for="userID">User ID:</label>
-                                <select class="form-control" id="userID" name="userId" required>
-                                    <c:forEach var="user" items="${listUser}">
-                                        <option value="${user.userId}">${user.fullName}</option>
-                                    </c:forEach>
-                                </select>
+                                <input type="text" class="form-control" name="userId" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="roomID">Room ID:</label>
-                                <select class="form-control" id="roomID" name="roomId" required>
-                                    <c:forEach var="room" items="${listRoom}">
-                                        <option value="${room.RID}">${room.name}</option>
-                                    </c:forEach>
-                                </select>
+                                <input type="text" class="form-control" name="roomId" required>
                             </div>
-
 
                             <div class="form-group">
                                 <label for="checkInDate">Check-In Date:</label>
@@ -129,21 +120,6 @@
                                 <label for="note">Note:</label>
                                 <input type="text" class="form-control" name="note">
                             </div>
-
-                            <div class="form-group">
-                                <label>Services:</label><br>
-                                <div class="row">
-                                    <c:forEach var="service" items="${listService}">
-                                        <div class="col-md-6">
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="service${service.seID}" name="services" value="${service.seID}">
-                                                <label class="form-check-label" for="service${service.seID}">${service.serviceName}</label>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </div>
-
 
                             <input type="hidden" class="form-control" name="transactionCode" value="0">
 

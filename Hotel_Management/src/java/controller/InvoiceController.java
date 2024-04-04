@@ -1,9 +1,6 @@
 package controller;
 
 import dao.InvoicesDAO;
-import dao.RoomDAO;
-import dao.ServiceDAO;
-import dao.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +11,10 @@ import java.sql.Date;
 import java.util.List;
 import model.Invoices;
 
-
+/**
+ *
+ * @author lvhn1
+ */
 @WebServlet(name = "InvoiceController", urlPatterns = {"/invoice"})
 public class InvoiceController extends HttpServlet {
 
@@ -56,18 +56,15 @@ public class InvoiceController extends HttpServlet {
             throws ServletException, IOException {
         List<Invoices> invoiceList = invoicesDAO.getAllInvoices();
         request.setAttribute("invoicesList", invoiceList);
-        request.setAttribute("listUser", new UserDAO().readAllUsers());
-        request.setAttribute("listRoom", new RoomDAO().getAllRooms());
-        request.setAttribute("listService", new ServiceDAO().getServices());
         request.getRequestDispatcher("invoice-list.jsp").forward(request, response);
     }
 
     private void updateInvoiceStatus(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
+        String transactionCode = request.getParameter("transactionCode");
 
-        if (id != null && !id.isEmpty()) {
-            boolean updated = invoicesDAO.updateInvoiceStatusById(Integer.parseInt(id), 0);
+        if (transactionCode != null && !transactionCode.isEmpty()) {
+            boolean updated = invoicesDAO.updateInvoiceStatusByTransactionCode(transactionCode);
 
             if (updated) {
                 response.sendRedirect("invoice?action=list&success");
@@ -100,7 +97,8 @@ public class InvoiceController extends HttpServlet {
         invoice.setNumberPerson(numberPerson);
         invoice.setNumberRoom(numberRoom);
         invoice.setNote(note);
-        invoice.setTransactionCode(null);
+   
+     invoice.setTransactionCode(null);
 
         // Call DAO method to add the new invoice
         invoicesDAO.createNewInvoice(invoice);
@@ -108,5 +106,4 @@ public class InvoiceController extends HttpServlet {
         // Redirect back to the invoice list page
         response.sendRedirect("invoice?action=list");
     }
-
 }
